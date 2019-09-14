@@ -13,4 +13,4 @@
 直接解析到index.html，然后由html的传送的对应的页面。
 
 ## 关于数据库里面的数据
-[](./images/user.bmp)
+[](https://github.com/52stu/Notes_pub/blob/master/MSSQL_injection_code/images/users.bmp)
