@@ -14,3 +14,5 @@
 
 ## 关于数据库里面的数据
 ![](https://github.com/52stu/Notes_pub/blob/master/MSSQL_injection_code/images/users.bmp)
+
+![](https://www.github.com/52stu/Images/raw/master/小书匠/1568462292636.png)
