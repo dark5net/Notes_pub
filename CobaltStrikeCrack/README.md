@@ -75,7 +75,38 @@ Cobalt Strike 官网：https://cobaltstrike.com/
 			} else
 	```
 
-4. 空格后门
+4. 添加Xor加密文件
+
+	文件位置：`common/ArtifactUtils.class`
+
+	```
+	public static byte[] _XorEncode(final byte[] data, final String arch) {
+		AssertUtils.TestArch(arch);
+		if ("x86".equals(arch)) {
+			final byte[] decoder = XorStub();
+			final byte[] payload = XorEncoder.encode(data);
+			return CommonUtils.join(decoder, payload);
+		}
+		if ("x64".equals(arch)) {
+			final byte[] decoder = CommonUtils.readResource("resources/xor64.bin");
+			final byte[] payload = XorEncoder.encode(data);
+			return CommonUtils.join(decoder, payload);
+		}
+		return new byte[0];
+	}
+
+	public static byte[] XorEncode(final byte[] data, final String arch) {
+		if (License.isTrial()) {
+			CommonUtils.print_trial("Disabled " + arch + " payload stage encoding.");
+			return data;
+		}
+		AssertUtils.Test(data.length > 16384, "XorEncode used on a stager (or some other small thing)");
+		return _XorEncode(data, arch);
+	}
+	```
+	>试用版不会进行`payload stage encoding`，所以试用版软件包中并没有带xor.bin/xor64.bin文件，如果有这两个文件的话，可以添加到resources/xor.bin、resources/xor64.bin路径下。Github上有热心老哥提供了xor64的生成脚本：https://github.com/verctor/CS_xor64
+
+5. 空格后门
 >在3.13版爆出后门一个，可以通过该后们发现该VPS是C&C服务器。
 
 文件位置：`common/WebTransforms.class`
@@ -105,3 +136,5 @@ https://utf32.com/2019/02/11/cobalt-strike-crack/
 http://caidaome.com/?post=140
 
 https://www.cnblogs.com/ssooking/p/9825917.html
+
+https://github.com/verctor/CS_xor64
