@@ -47,28 +47,28 @@ Cobalt Strike 官网：https://cobaltstrike.com/
 
 
 2. 去除被检测指纹
-```
-common/ArtifactUtils.class
-common/ListenerConfig.class
-common/BaseArtifactUtils.class
-server/ProfileEdits.class
-```
+	```
+	common/ArtifactUtils.class
+	common/ListenerConfig.class
+	common/BaseArtifactUtils.class
+	server/ProfileEdits.class
+	```
 
-搜索关键字`ANTIVIRUS`，并做适当修改，去除全部或去除字符串。
+	搜索关键字`ANTIVIRUS`，并做适当修改，去除全部或去除字符串。
 
 
 
 3. 去除监听器数量限制
 
-`aggressor/dialogs/ListenerDialog.class`
+	`aggressor/dialogs/ListenerDialog.class`
 
-搜索关键词并去除以下判断
-```
-if(Listener.isEgressBeacon(payload) && DataUtils.isBeaconDefined(datal) && !name.equals(DataUtils.getEgressBeaconListener(datal)))
-        {
-            DialogUtils.showError("You may only define one egress Beacon per team server.\nThere are a few things I need to sort before you can\nput multiple Beacon HTTP/DNS listeners on one server.\nSpin up a new team server and add your listener there.");
-        } else
-```
+	搜索关键词并去除以下判断
+	```
+	if(Listener.isEgressBeacon(payload) && DataUtils.isBeaconDefined(datal) && !name.equals(DataUtils.getEgressBeaconListener(datal)))
+			{
+				DialogUtils.showError("You may only define one egress Beacon per team server.\nThere are a few things I need to sort before you can\nput multiple Beacon HTTP/DNS listeners on one server.\nSpin up a new team server and add your listener there.");
+			} else
+	```
 
 
 
