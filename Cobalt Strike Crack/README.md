@@ -7,7 +7,7 @@ Cobalt Strike 官网：https://cobaltstrike.com/
 
 ## I 需要修改的点
 
-+ 修改程序使用时间限制及提示框
+1. 修改程序使用时间限制及提示框
 文件位置：`common/License.class`
 	+ 使用时间
 	```
@@ -44,7 +44,7 @@ Cobalt Strike 官网：https://cobaltstrike.com/
 
 
 
-+ 去除被检测指纹
+2. 去除被检测指纹
 ```
 common/ArtifactUtils.class
 common/ListenerConfig.class
@@ -56,7 +56,7 @@ server/ProfileEdits.class
 
 
 
-+ 去除监听器数量限制
+3. 去除监听器数量限制
 `aggressor/dialogs/ListenerDialog.class`
 
 搜索关键词并去除以下判断
