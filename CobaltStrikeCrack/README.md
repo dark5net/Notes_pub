@@ -120,7 +120,7 @@ Cobalt Strike 官网：https://cobaltstrike.com/
 
 	代码段：`response.status += " ";`
 
-7. Cobalt Strike标题
+7. Cobalt Strike 标题
 
 	文件位置：`aggressor/AggressorClient.class`，编译回去的时候老是出错，所以用的3.12版本的`AggressorClient.class`，然后成功修改。
 	
