@@ -5,7 +5,7 @@ Cobalt Strike 官网：https://cobaltstrike.com/
 
 程序校验：https://verify.cobaltstrike.com/
 
-## 需要修改的点
+## I 需要修改的点
 
 + 修改程序使用时间限制及提示框
 文件位置：`common/License.class`
@@ -70,16 +70,21 @@ if(Listener.isEgressBeacon(payload) && DataUtils.isBeaconDefined(datal) && !name
 
 
 
-## 编译回去
+## II 编译回去
 `javac -classpath cobaltstrike.jar xxxx.java`
 
-## 编译问题
-有时候编译会出问题的，不是error的话没啥问题。Error请看这个：![cobalt strike修改小坑](https://utf32.com/2019/02/11/cobalt-strike-crack/)
+## III 编译问题
+有时候编译会出问题的，不是error的话没啥问题。Error请看这个：[cobalt strike修改小坑](https://utf32.com/2019/02/11/cobalt-strike-crack/)
 
-## 参考
+## IV 参考
 https://rcoil.me/2018/10/CobaltStrike-3-12-%E7%A0%B4%E8%A7%A3/
+
 https://wbglil.github.io/2019/03/03/cobaltstrike-3-13/
+
 https://mrxn.net/hacktools/619.html
+
 https://www.mrwu.red/fenxiang/3389.html
+
 https://kingx.me/CobaltStrike-Patch.html
+
 https://utf32.com/2019/02/11/cobalt-strike-crack/
