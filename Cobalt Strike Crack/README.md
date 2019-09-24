@@ -8,7 +8,9 @@ Cobalt Strike 官网：https://cobaltstrike.com/
 ## I 需要修改的点
 
 1. 修改程序使用时间限制及提示框
+
 文件位置：`common/License.class`
+
 	+ 使用时间
 	```
 	private static long life = 21L;
@@ -57,6 +59,7 @@ server/ProfileEdits.class
 
 
 3. 去除监听器数量限制
+
 `aggressor/dialogs/ListenerDialog.class`
 
 搜索关键词并去除以下判断
