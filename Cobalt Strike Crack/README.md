@@ -9,15 +9,17 @@ Cobalt Strike 官网：https://cobaltstrike.com/
 
 1. 修改程序使用时间限制及提示框
 
-文件位置：`common/License.class`
+	文件位置：`common/License.class`
 
 	+ 使用时间
+	
 	```
 	private static long life = 21L;
 	将21天的试用期修改成
 	private static long life = 99999L;
 	```
 	+ 修改isTrail的判断逻辑
+	
 	```
 	public static boolean isTrial()
     {
@@ -31,6 +33,7 @@ Cobalt Strike 官网：https://cobaltstrike.com/
 	```
 	
 	+ 去除打开软件弹框框
+	
 	```
 	public static void checkLicenseGUI(Authorization auth)
 	{
