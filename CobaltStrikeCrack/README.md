@@ -49,12 +49,14 @@ Cobalt Strike 官网：https://cobaltstrike.com/
 
 
 
-2. 去除被检测指纹
+2. 去除被检测指纹（后门指纹）
 	```
 	common/ArtifactUtils.class
 	common/ListenerConfig.class
 	common/BaseArtifactUtils.class
 	server/ProfileEdits.class
+	resource/template.x64.ps1
+	resource/template.x86.ps1
 	```
 
 	搜索关键字`ANTIVIRUS`，并做适当修改，去除全部或去除字符串。
@@ -73,7 +75,12 @@ Cobalt Strike 官网：https://cobaltstrike.com/
 			} else
 	```
 
+4. 空格后门
+>在3.13版爆出后门一个，可以通过该后们发现该VPS是C&C服务器。
 
+文件位置：`common/WebTransforms.class`
+
+代码段：`response.status += " ";`
 
 
 ## II 编译回去
@@ -94,3 +101,7 @@ https://www.mrwu.red/fenxiang/3389.html
 https://kingx.me/CobaltStrike-Patch.html
 
 https://utf32.com/2019/02/11/cobalt-strike-crack/
+
+http://caidaome.com/?post=140
+
+https://www.cnblogs.com/ssooking/p/9825917.html
