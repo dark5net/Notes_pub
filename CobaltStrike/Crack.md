@@ -35,7 +35,7 @@ Cobalt Strike 官网：https://cobaltstrike.com/
 	+ 去除打开软件弹框框
 	
 	```
-	public static void checkLicenseGUI(Authorization auth)
+	public static void checkLicenseGUI(Authorization authorization)
 	{
 		....
 	}
@@ -55,8 +55,8 @@ Cobalt Strike 官网：https://cobaltstrike.com/
 	common/ListenerConfig.class
 	common/BaseArtifactUtils.class
 	server/ProfileEdits.class
-	resource/template.x64.ps1
-	resource/template.x86.ps1
+	resources/template.x64.ps1
+	resources/template.x86.ps1
 	```
 
 	搜索关键字`ANTIVIRUS`，并做适当修改，去除全部或去除字符串。
@@ -69,10 +69,10 @@ Cobalt Strike 官网：https://cobaltstrike.com/
 
 	搜索关键词并去除以下判断
 	```
-	if(Listener.isEgressBeacon(payload) && DataUtils.isBeaconDefined(datal) && !name.equals(DataUtils.getEgressBeaconListener(datal)))
-			{
-				DialogUtils.showError("You may only define one egress Beacon per team server.\nThere are a few things I need to sort before you can\nput multiple Beacon HTTP/DNS listeners on one server.\nSpin up a new team server and add your listener there.");
-			} else
+	if(Listener.isEgressBeacon(s2) && DataUtils.isBeaconDefined(datal) && !s.equals(DataUtils.getEgressBeaconListener(datal)))
+        {
+            DialogUtils.showError("You may only define one egress Beacon per team server.\nThere are a few things I need to sort before you can\nput multiple Beacon HTTP/DNS listeners on one server.\nSpin up a new team server and add your listener there.");
+        } else
 	```
 
 4. 添加Xor加密文件
