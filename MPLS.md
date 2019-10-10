@@ -20,8 +20,10 @@ VRF：Virtual Routing and Forwarding，翻译成虚拟路由及转发，它是�
 
 ### MPLS
 ### CE
-### PE
+CE：Customer Edge，用户边缘设备，服务提供商所连接的用户端路由器。CE路由器通过连接一个或多个PE路由器，为用户提供服务接入。CE路由器通常是一台IP路由器，它与连接的PE路由器建立邻接关系。
 
+### PE
+PE：Provider Edge，即Provide的边缘设备，服务提供商骨干网的边缘路由器，它相当于标签边缘路由器（LER）。PE路由器连接CE路由器和P路由器，是最重要的网络节点。用户的流量通过PE路由器流入用户网络，或者通过PE路由器流到MPLS骨干网。
 
 ### RD
 ### RT
