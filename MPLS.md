@@ -8,8 +8,9 @@
     - [MPLS](#mpls)
     - [CE](#ce)
     - [PE](#pe)
-    - [RD](#rd)
-    - [RT](#rt)
+    - [RD(Route Distinguisher)](#rdroute-distinguisher)
+    - [RT(Route Target)](#rtroute-target)
+    - [LSR](#lsr)
     - [LER](#ler)
     - [LSR](#lsr)
 - [参考](#参考)
@@ -31,14 +32,27 @@ CE：Customer Edge，用户边缘设备，服务提供商所连接的用户端�
 ### PE
 PE：Provider Edge，即Provide的边缘设备，服务提供商骨干网的边缘路由器，它相当于标签边缘路由器（LER）。PE路由器连接CE路由器和P路由器，是最重要的网络节点。用户的流量通过PE路由器流入用户网络，或者通过PE路由器流到MPLS骨干网。
 
-### RD
+### RD(Route Distinguisher)
+1. 用于标识PE上不同VPN实例，其主要作用是实现VPN实例之间地址复用，与IP地址一起构成12 Bytes的VPNv4地址。
+2. RD与路由一起被携带在BGP Update报文中发送给对端。
+3. RD不具有选路能力，不影响路由的发送与接受。
+4. RD用来区分本地VRF，本地有效。
 
+### RT(Route Target)
+1. RT是VPNv4路由携带的一个重要属性，它决定VPN路由的收发和过滤，PE依靠RT属性区分不同VPN之间路由。
+2. 当从VRF表中导出VPN路由时，要用Export RT对VPN路由进行标记。
+3. 当往VRF表中导入VPN路由时，只有所带RT标记与VRF表中任意一个Import RT相符的路由才会被导入到VRF表中。
 
-### RT
-
-### LER
 
 ### LSR
+LSR：Label Switching Router，标签交换路由器，在mpls域中负载标签交换操作的路由器。
+
+### LER
+Label Edge Router，标签边缘路由器，在mpls域的边缘负责标签的压人或者弹出，连接其它网络的路由器。
+
+### LSR
+Label Switched Path，标签转发路径，IP报文在MPLS网络中经过的路径，LSP是一个单向路径，与数据流的方向一致。
+
 
 ## 参考
 [MPLS基础总结](https://darkless.cn/2018/03/23/MPLS-summary/)
