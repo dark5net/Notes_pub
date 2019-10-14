@@ -41,3 +41,6 @@
 ### EBGP和IBGP混合配置
 
 ## 参考
+
+[思科路由器 BGP (EGBP) 路由协议最简单的配置实例详解](https://zhuanlan.zhihu.com/p/27016475)
+
