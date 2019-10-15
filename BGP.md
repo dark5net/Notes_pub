@@ -98,9 +98,13 @@ control-plane
 
 ### IBGP配置
 程配置 BGP router-ID   //Router-ID更改需要重启BGP进程 Clear ip bgp
+
 进程配置Neighbor 回环地址/物理地址 remote-as AS-Number
+
 进程配置neighbor回环地址 update-source loopback
+
 进程配置neighbor 回环地址 next-hop-self
+
 
 ### EBGP和IBGP混合配置
 
