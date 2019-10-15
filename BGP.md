@@ -107,6 +107,7 @@ control-plane
 
 
 ### EBGP和IBGP混合配置
+[思科路由器 BGP 跨 AS 组网配置实例详解](https://zenandidi.com/archives/1814)
 
 ## 参考
 
