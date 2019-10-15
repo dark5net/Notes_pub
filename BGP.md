@@ -8,7 +8,7 @@
     - [BGP介绍](#bgp介绍)
     - [IBGP介绍](#ibgp介绍)
     - [EBGP介绍](#ebgp介绍)
-- [BGP配置](#bgp配置)
+- [BGP的几种配置](#bgp的几种配置)
     - [EBGP配置](#ebgp配置)
     - [IBGP配置](#ibgp配置)
     - [EBGP和IBGP混合配置](#ebgp和ibgp混合配置)
@@ -35,12 +35,86 @@
 ### EBGP介绍
 &emsp;EBGP —— (External Border Gateway Protocol) 外部边界网关协议，用于在不同的自治系统间交换路由信息。
 
-## BGP配置
+## BGP的几种配置
 ### EBGP配置
+![EBGP](https://www.github.com/52stu/Images/raw/master/xsj/1571107012574.png)
+
+```
+hostname R4
+!
+boot-start-marker
+boot-end-marker
+!
+no aaa new-model
+no ip icmp rate-limit unreachable
+ip cef
+!
+no ip domain lookup
+!
+ip tcp synwait-time 5
+!
+interface Ethernet0/0
+ ip address 192.168.1.1 255.255.255.0
+ half-duplex
+!
+interface Ethernet1/0
+ ip address 10.0.0.1 255.255.255.0
+ half-duplex
+!
+interface Ethernet1/1
+ ip address 10.0.1.1 255.255.255.0
+ half-duplex
+!
+interface Ethernet1/2
+ no ip address
+ shutdown
+ half-duplex
+!
+interface Ethernet1/3
+ no ip address
+ shutdown
+ half-duplex
+!
+router bgp 2
+ no synchronization
+ bgp log-neighbor-changes
+ network 10.0.0.0 mask 255.255.255.0
+ network 10.0.1.0 mask 255.255.255.0
+ network 192.168.1.0
+ neighbor 10.0.0.2 remote-as 1
+ neighbor 10.0.1.2 remote-as 4
+ no auto-summary
+!
+ip forward-protocol nd
+!
+no ip http server
+no ip http secure-server
+!
+no cdp log mismatch duplex
+!
+control-plane
+```
+
+
 ### IBGP配置
+程配置 BGP router-ID   //Router-ID更改需要重启BGP进程 Clear ip bgp
+进程配置Neighbor 回环地址/物理地址 remote-as AS-Number
+进程配置neighbor回环地址 update-source loopback
+进程配置neighbor 回环地址 next-hop-self
+
 ### EBGP和IBGP混合配置
 
 ## 参考
 
 [思科路由器 BGP (EGBP) 路由协议最简单的配置实例详解](https://zhuanlan.zhihu.com/p/27016475)
 
+[BGP 什么时候需要用 next-hop-self 与 ebgp-multihop 2](https://blog.csdn.net/a9254778/article/details/41652915)
+
+[BGP—peer group 实验整理—威哥](https://wenku.baidu.com/view/58cd662bed630b1c59eeb528.html)
+
+[bgp update-source有什么用](https://zhidao.baidu.com/question/557404953.html)
+
+[BGP配置update source loopback的意义是什么](http://blog.sina.com.cn/s/blog_69c81c3e0102xc2i.html)
+
+
+[CISCO BGP（EBGP/IBGP）基本配置小结以及如何防止BGP路由黑洞（附实验拓扑）](http://blog.sina.com.cn/s/blog_6bb4e5cd0100y0j5.html)
