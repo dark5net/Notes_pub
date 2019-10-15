@@ -118,3 +118,11 @@ control-plane
 
 
 [CISCO BGP（EBGP/IBGP）基本配置小结以及如何防止BGP路由黑洞（附实验拓扑）](http://blog.sina.com.cn/s/blog_6bb4e5cd0100y0j5.html)
+
+[Cisco--BGP配置命令](https://wenku.baidu.com/view/f90ee75dcf84b9d528ea7a29.html)
+
+[EBGP vs IBGP](https://www.sdnlab.com/20294.html)
+
+[BGP配置指南](http://www.jdccie.com/?p=1763)
+
+[思科路由器 BGP 跨 AS 组网配置实例详解](https://zenandidi.com/archives/1814)
