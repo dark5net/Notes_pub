@@ -51,7 +51,6 @@ Cobalt Strike 官网：https://cobaltstrike.com/
 
 2. 去除被检测指纹（后门指纹）
 	```
-	common/ArtifactUtils.class
 	common/ListenerConfig.class
 	common/BaseArtifactUtils.class
 	server/ProfileEdits.class
