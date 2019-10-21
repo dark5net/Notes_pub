@@ -9,8 +9,10 @@
 2. Teemo
 3. wydomain
 
+**II 使用说明**
+&emsp;由于是配合的其他子域名收集的，所以就用把相关子域名工具放置在特定的位置：`/opt/`，然后再把本BASH脚本放在：`/opt/subdomain_find/`。配合我写的Linux环境配置脚本用起来就会很舒服了的。[Linux_pentest_initv2](https://raw.githubusercontent.com/52stu/Notes_pub/master/Linux_pentest_init/Linux_pentest_initv2.sh) 还有不懂的就自己领会吧。
 
-**II 脚本代码如下**
+**III 脚本代码如下**
 ```bash
 #!/bin/bash
 
@@ -59,4 +61,3 @@ done
 
 echo "We are completed."
 ```
-
