@@ -106,7 +106,7 @@ Cobalt Strike 官网：https://cobaltstrike.com/
 	>试用版不会进行`payload stage encoding`，所以试用版软件包中并没有带xor.bin/xor64.bin文件，如果有这两个文件的话，可以添加到resources/xor.bin、resources/xor64.bin路径下。Github上有热心老哥提供了xor64的生成脚本：https://github.com/verctor/CS_xor64
 
 5. exit暗桩
-	>请自行编译后替换 BeaconData.class 文件。 exit 的 bug 找到了是作者留的一个暗装之前一直没注意到今天圈子里的 Lsmod 大佬写了一下才发现真是疏忽了感谢 Lsmod 大佬。
+	>正式版有问题，请自行编译后替换 BeaconData.class 文件。 exit 的 bug 找到了是作者留的一个暗装之前一直没注意到今天圈子里的 Lsmod 大佬写了一下才发现真是疏忽了感谢 Lsmod 大佬。
 
 	替换文件`BeaconData.class`的内容为`BeaconData.java`的内容。
 
