@@ -11,6 +11,12 @@
 
 ```bash
 #!/bin/bash
+
+#########################
+	Team Dark5	#
+ https://www.dark5.net	#
+#########################
+
 rm -rf domain
 rm -rf ips
 rm -rf mail
@@ -51,6 +57,7 @@ else
 	printf "%-30s %-10s %-15s\n" $domainname 'is Died.' $domain_ip
 fi
 done
+
 
 echo "We are completed."
 ```
