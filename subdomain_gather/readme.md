@@ -4,11 +4,13 @@
 ## 脚本说明
 &emsp;使用了几款子域名收集工具收集域名，并去重、筛选存活、获取IP。
 
-**子域名收集工具包括**
+**I 子域名收集工具包括**
 1. subDomainBrute
 2. Teemo
 3. wydomain
 
+
+**II 脚本代码如下**
 ```bash
 #!/bin/bash
 
