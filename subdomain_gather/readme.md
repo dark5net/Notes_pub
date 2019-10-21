@@ -13,8 +13,8 @@
 #!/bin/bash
 
 #########################
-	Team Dark5	#
- https://www.dark5.net	#
+	Team Dark5	
+ https://www.dark5.net	
 #########################
 
 rm -rf domain
