@@ -14,10 +14,6 @@
 ```bash
 #!/bin/bash
 
-#########################
-	Team Dark5	
- https://www.dark5.net	
-#########################
 
 rm -rf domain
 rm -rf ips
