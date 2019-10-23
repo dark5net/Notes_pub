@@ -15,7 +15,7 @@
 **标准的ACL使用 1 ~ 99 以及1300~1999之间的数字作为表号，扩展的ACL使用 100 ~ 199以及2000~2699之间的数字作为表号。访问控制列表是自上往下匹配的，之前匹配到一条规则就不会再往下匹配了。** 详细请转：https://wenku.baidu.com/view/dbafd03b0b4c2e3f572763b8.html
 
 ## 标准访问控制列表（Standard ACL）
-这个就是比较简单的访问控制功能，就比如运训谁访问谁；不允许谁访问谁。**标准ACL要尽量靠近目的端。**
+这个就是比较简单的访问控制功能，就比如允许谁访问谁；不允许谁访问谁。**标准ACL要尽量靠近目的端。**
 ```
   <1-99>       Standard IP access-list number
   <1300-1999>  Standard IP access-list number (expanded range)
@@ -29,7 +29,7 @@ access-list 99 deny 192.168.2.0 0.0.0.255
 int f1/1
 ip access-group 99 out
 ```
-删除和弃用acl都是在语句前面加no，如：`no access-list 99` **该模式无法删除单条acl，只能把整个列表删除。**
+删除和弃用ACL都是在语句前面加no，如：`no access-list 99` **该模式无法删除单条acl，只能把整个列表删除。**
 
 
 ## 扩展访问控制列表（Extended ACL）
@@ -51,7 +51,7 @@ access-list 101 permit ip any any
 int f0/0
 ip access-group 101 out
 ```
-删除和弃用acl都是在语句前面加no，如：`no access-list 101` **该模式无法删除单条acl，只能把整个列表删除。**
+删除和弃用ACL都是在语句前面加no，如：`no access-list 101` **该模式无法删除单条acl，只能把整个列表删除。**
 
 
 
