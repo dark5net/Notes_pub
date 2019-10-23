@@ -17,8 +17,9 @@
 ## 标准访问控制列表（Standard ACL）
 这个就是比较简单的访问控制功能，就比如运训谁访问谁；不允许谁访问谁。**标准ACL要尽量靠近目的端。**
 ```
-  <1-99>            IP standard access list
-  <100-199>         IP extended access lis
+  <1-99>       Standard IP access-list number
+  <1300-1999>  Standard IP access-list number (expanded range)
+  WORD         Access-list name
 ```
 
 ```
@@ -36,8 +37,10 @@ ip access-group 99 out
 格式是：`access-list access-list-number {permit|deny} protocol source source-wildcard [poerator port] destination destination-wildcard [operator port] [established] [log]`
 
 ```
-  <1-99>            IP standard access list
-  <100-199>         IP extended access lis
+R2(config)#ip access-list extended ?
+  <100-199>    Extended IP access-list number
+  <2000-2699>  Extended IP access-list number (expanded range)
+  WORD         Access-list name
 ```
 
 ```
@@ -63,6 +66,9 @@ ip access-list extended test //创建一个基于扩展访问控制列表名为t
     permit tcp host 10.22.22.1 any eq telnet  //默认号是10，然后以10递增
     111 deny tcp host 10.22.22.1 any eq telnet  //定义该条规则号为111
     exit
+
+int f0/0
+ip access-group test out
 ```
 
 如果需要重新配置test，就重新进入就可以了，如：`ip access-list extended test`
