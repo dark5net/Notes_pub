@@ -32,7 +32,7 @@ Windows 8.1 介绍了以下的注册表项，可以用来设置你的 WDigest �
 
 然后需要让此注册表生效，可通过锁屏**或**注册目标账号让其重新登陆来达到生效目的。
 * **锁屏CMD命令**
-`rundll32.exe user32.dll,LockWorkStation` 此命令应用在PC机单用户登陆情况下。
+`rundll32.exe user32.dll,LockWorkStation` 此命令应用在Console登陆（非RDP登录）情况下。
 
 * **注销目标账号**
 `query user` `logoff ID` 此命令兼容各种情况，但注销在操作的管理员账号，此操作属于高危操作。
