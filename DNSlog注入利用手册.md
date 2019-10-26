@@ -13,6 +13,7 @@
     - [命令执行](#命令执行)
     - [SSRF](#ssrf)
     - [XSS](#xss)
+    - [SQLMap配合DNSlog](#sqlmap配合dnslog)
     - [其他](#其他)
         - [XML Entity Injection](#xml-entity-injection)
         - [Struts2](#struts2)
@@ -145,6 +146,8 @@ ping %USERNAME%.b182oj.ceye.io
 ### SSRF
 
 ### XSS
+
+### SQLMap配合DNSlog
 
 ### 其他
 #### XML Entity Injection
