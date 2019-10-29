@@ -1,12 +1,9 @@
 <!-- TOC -->
 
 - [前言](#前言)
-- [密码抓取原理](#密码抓取原理)
-    - [Chrome](#chrome)
-    - [FireFox](#firefox)
-    - [IE](#ie)
-- [密码抓取实现](#密码抓取实现)
-    - [Chrome](#chrome-1)
+- [Chrome](#chrome)
+    - [Chrome密码抓取原理](#chrome密码抓取原理)
+    - [Chrome密码抓取实现](#chrome密码抓取实现)
 - [历史记录获取](#历史记录获取)
 - [参考](#参考)
 
@@ -15,8 +12,8 @@
 ## 前言
 *每一次都在彷徨中挣扎，每一次……* 在后渗透阶段，获得权限后需要搜集目标系统的信息。信息越全面，越有助于进一步的渗透。对于Windows系统，用户浏览器往往包含非常有价值的信息。
 
-## 密码抓取原理
-### Chrome
+## Chrome
+### Chrome密码抓取原理
 ![](https://www.github.com/52stu/Images/raw/master/xsj/1572253732185.png)
 
 ![](https://www.github.com/52stu/Images/raw/master/xsj/1572253750873.png)
@@ -33,14 +30,9 @@ Chrome中保存的密码先被二次加密，然后被保存在SQLite数据库�
 
 **注：**
 
-如果Chrome正在运行，无法使用SQLiteStudio打开数据库文件Login Data，可将该文件复制后再打开
+如果Chrome正在运行，无法使用SQLiteStudio打开数据库文件Login Data，可将该文件复制后再打开，用完再删除。
 
-### FireFox
-
-### IE
-
-## 密码抓取实现
-### Chrome
+### Chrome密码抓取实现
 首先，编写程序实现读取SQLite数据库文件，这里选择使用python实现
 
 开源代码很多，所以这里只给出一个示例：
@@ -65,7 +57,6 @@ for result in cursor.fetchall():
 import os
 import sqlite3
 import win32crypt
-import binascii
 import shutil
 
 
@@ -134,6 +125,8 @@ if __name__ == '__main__':
 **杀软对抗测试**
 * Avast_free_antivirus （20191029 杀）
 * Malwarebytes premium trial 2 （20191029 过）
+
+
 
 ## 历史记录获取
 
