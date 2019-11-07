@@ -14,6 +14,7 @@ win10出现了问题，在一年前的时候配置好后，发现不能其使用
 * 驱动要求：AMD GPUs on Windows require "AMD Radeon Software Crimson Edition" (15.12 or later)
 
 要按照Hashcat官方给出的要求安装指定版本驱动。在AMD官网下载驱动。
+
 ![](https://www.github.com/52stu/Images/raw/master/xsj/1573115214803.png)
 
 
