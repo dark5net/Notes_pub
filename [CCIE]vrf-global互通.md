@@ -17,11 +17,17 @@ ip route vrf jx 0.0.0.0 0.0.0.0 192.168.3.1 global
 
 ![](https://raw.githubusercontent.com/52stu/Images/master/xsj/20200107075708.png)
 
+>据团队神秘大佬说，有些路由器是不支持的。
+
+本次实验环境：win 7\GNS3\路由是C2600
+
+
+
 ## 其他
 除开这种，官网还有更加多的配置方法，可定义度较高。
 [从MPLS VPN的互联网访问使用一张全局路由表](https://www.cisco.com/c/zh_cn/support/docs/multiprotocol-label-switching-mpls/mpls/24508-internet-access-mpls-vpn.html)
 
->据团队神秘大佬说，有些路由器是不支持的。
+
 
 >至此，就已经圆满完成草莓给的任务。“歪，草莓啊，哥给你整完了，明天咋感谢我呀？” “emmmm，渣哥，那我明晚给你按摩行不行吖~”
 
